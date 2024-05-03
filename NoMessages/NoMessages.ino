@@ -18,9 +18,9 @@
 rgb_lcd lcd;
 Adafruit_MPU6050 mpu;
 
-const char* ssid = "B535_B23D";//B535_B23D
-const char* password = "TgdN3d4BGYb";//TgdN3d4BGYb
-int keyIndex = 0;           // your network key Index number (needed only for WEP)
+const char* ssid = "B535_B23D";        //B535_B23D
+const char* password = "TgdN3d4BGYb";  //TgdN3d4BGYb
+int keyIndex = 0;                      // your network key Index number (needed only for WEP)
 
 uint32_t tsLastReportThingSpeak = 0;  //4 byte unsigned int to to time ThingSpeak 20s
 WiFiClient client;
@@ -102,7 +102,7 @@ byte sad[] = {
 uint32_t tsLastReport = 0;
 
 String getAlert() {
-     
+
   buttonState = digitalRead(BUTTON_PIN);
 
   if (buttonState == HIGH) {
@@ -117,15 +117,14 @@ String fallDetection() {
   mpu.getEvent(&a, &g, &temp);
   if (a.acceleration.z < 0.6 && g.gyro.z < 45) {
     return String("FALL DETECTED!");
-  } 
-  else {
+  } else {
     return String("NO FALL DETECTED");
   }
 }
 
 void handleRoot() {
 
-  String message = homePagePart1 + temperature + homePagePart2 + humidity + homePagePart3a + beat + homePagePart3 + O2 + homePagePart4 + getAlert() + homePagePart5 + fallDetection() + homePagePart6 ;/*+ s + homePagePart6; */
+  String message = homePagePart1 + temperature + homePagePart2 + humidity + homePagePart3a + beat + homePagePart3 + O2 + homePagePart4 + getAlert() + homePagePart5 + fallDetection() + homePagePart6; /*+ s + homePagePart6; */
 
 
   server.send(200, "text/html", message);
@@ -157,8 +156,8 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   buttonState = digitalRead(BUTTON_PIN);
 
-   lcd.begin(16, 2);
-   lcd.clear();
+  lcd.begin(16, 2);
+  lcd.clear();
   WiFi.mode(WIFI_STA);
   ThingSpeak.begin(client);  // Initialize ThingSpeak
 
@@ -262,11 +261,11 @@ void loop() {
   // Make sure to call update as fast as possible
   server.handleClient();
 
-    sensors_event_t a, g, temp;
-    mpu.getEvent(&a, &g, &temp);
-    //Serial.println(a.acceleration.z + g.gyro.z);
+  sensors_event_t a, g, temp;
+  mpu.getEvent(&a, &g, &temp);
+  //Serial.println(a.acceleration.z + g.gyro.z);
 
- if (digitalRead(BUTTON_PIN) == HIGH) {
+  if (digitalRead(BUTTON_PIN) == HIGH) {
     buttonState = digitalRead(BUTTON_PIN);
 
     lcd.createChar(2, sad);
@@ -306,27 +305,27 @@ void loop() {
     //  Serial.print("Heart rate:");
     beat = pox.getHeartRate();
     O2 = pox.getSpO2();
-      Serial.print(beat);
-      Serial.print("bpm / SpO2:");
-      Serial.print(O2);
-      Serial.println("%");
+    Serial.print(beat);
+    Serial.print("bpm / SpO2:");
+    Serial.print(O2);
+    Serial.println("%");
 
     tsLastReport = millis();
   }
-        lcd.setCursor(10, 1);
-        lcd.print(":"+String(beat));
-        lcd.createChar(0, heart);
-        lcd.setCursor(10, 1);
-        lcd.print((char)0);
+  lcd.setCursor(10, 1);
+  lcd.print(":" + String(beat));
+  lcd.createChar(0, heart);
+  lcd.setCursor(10, 1);
+  lcd.print((char)0);
 
-         lcd.setCursor(0, 0);
-        lcd.print("Temp:"+ String(temperature, 1));
+  lcd.setCursor(0, 0);
+  lcd.print("Temp:" + String(temperature, 1));
   lcd.createChar(1, degree);
 
   lcd.setCursor(9, 0);
   lcd.print((char)1);
   lcd.setCursor(0, 1);
-  lcd.print("O2:"+String(O2)+"%");
+  lcd.print("O2:" + String(O2) + "%");
 
   /* Measure temperature and humidity.  If the functions returns
        true, then a measurement is available. */
@@ -338,24 +337,23 @@ void loop() {
     Serial.println("%");
   }
 
-  ThingSpeak.setField(1,humidity );
-  ThingSpeak.setField(2,temperature);
-  ThingSpeak.setField(3,beat );
-  ThingSpeak.setField(4,O2);
- 
-  if (millis() - tsLastReportThingSpeak > REPORTING_PERIOD_MS_THINGSPEAK ) {
-     // figure out the status message
-     if (temperature > 25 ) {
-    myStatus = String("Temperature is too high.");
-  } else if (temperature < 15 ) {
-    myStatus = String("Temperature is too low.");
-  } 
-  else {
-    myStatus = String("Temperature is fine.");
-  }
+  ThingSpeak.setField(1, humidity);
+  ThingSpeak.setField(2, temperature);
+  ThingSpeak.setField(3, beat);
+  ThingSpeak.setField(4, O2);
+
+  if (millis() - tsLastReportThingSpeak > REPORTING_PERIOD_MS_THINGSPEAK) {
+    // figure out the status message
+    if (temperature > 37) {
+      myStatus = String("Body temperature is too high.");
+    } else if (temperature < 35) {
+      myStatus = String("Body temperature is too low.");
+    } else {
+      myStatus = String("Body temperature is fine.");
+    }
     // set the status
     ThingSpeak.setStatus(myStatus);
-  //pox.update();
+    //pox.update();
     // write to the ThingSpeak channel
     int x = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
     if (x == 200) {
@@ -366,17 +364,16 @@ void loop() {
 
 
     tsLastReportThingSpeak = millis();  //update the time stamp
-      if (!pox.begin()) {
-    Serial.println("FAILED");
-    for (;;)
-      ;
-  } else {
-    Serial.println("SUCCESS");
-  }
-  pox.setOnBeatDetectedCallback(onBeatDetected);
-pox.update();
+    if (!pox.begin()) {
+      Serial.println("FAILED");
+      for (;;)
+        ;
+    } else {
+      Serial.println("SUCCESS");
+    }
+    pox.setOnBeatDetectedCallback(onBeatDetected);
+    pox.update();
 
-     //delay(20000); // Wait 20 seconds to update the channel again
+    //delay(20000); // Wait 20 seconds to update the channel again
   }
- 
 }

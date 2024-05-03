@@ -13,7 +13,7 @@ String homePagePart1 = F(R"=====(<!DOCTYPE html>
  
 <!--Include a Title. Used by Search Engines -->
 <title> Real-Time Health Monitoring and Emergency Alert System </title>
-<link rel="icon" type="image/x-icon" alt= "logo of the project" href="https://github.com/Nokuvimba/SecondYearProject/blob/main/logo.jpg?raw=true">
+<link rel="icon" type="image/x-icon" href="https://github.com/Nokuvimba/SecondYearProject/blob/main/logo.jpg?raw=true" alt= "logo of the project">
 
 <style>
    
@@ -24,7 +24,7 @@ String homePagePart1 = F(R"=====(<!DOCTYPE html>
 	.flex-Container{
         display: flex;
         flex-direction: column;
-        background-color: lightpink;
+        background-color:lightpink;
       
       
       }
@@ -87,7 +87,7 @@ String homePagePart1 = F(R"=====(<!DOCTYPE html>
 </head>
 	<body>
 		<div class="flex-Container">
-		 <h1> <img src="https://github.com/Nokuvimba/SecondYearProject/blob/main/logo.jpg?raw=true" alt= "logo of the project" width="80" height="80">Real-Time Health Monitoring and Emergency Alert System <img src="https://github.com/Nokuvimba/SecondYearProject/blob/main/logo.jpg?raw=true" alt= "logo of the project" width="80" height="80"></h1>
+		 <h1> <img src="https://github.com/Nokuvimba/SecondYearProject/blob/main/logo.jpg?raw=true"alt= "logo of the project" width="80" height="80" >  Real-Time Health Monitoring and Emergency Alert System <img src="https://github.com/Nokuvimba/SecondYearProject/blob/main/logo.jpg?raw=true" alt= "logo of the project" width="80" height="80"></h1>
       
 		 <p><u>The following is the health status of a patient A</u></p>
         <div class="row">
@@ -95,17 +95,17 @@ String homePagePart1 = F(R"=====(<!DOCTYPE html>
             <div class="part1">
                 <p><u>patients graphs</u></p>
                 <div class ="graph-section1">
-                   <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2412150/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Humidity&type=line&xaxis=date&yaxis=Humidity"></iframe>
-                  <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2412150/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&max=100&min=0&results=60&title=Temperature&type=line&xaxis=time&yaxismax=50&yaxismin=0"></iframe>
+                   <iframe width="500" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2412150/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Humidity&type=line&xaxis=date&yaxis=Humidity"></iframe>
+                  <iframe width="500" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2412150/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&max=100&min=0&results=60&title=Temperature&type=line&xaxis=time&yaxismax=50&yaxismin=0"></iframe>
                 </div>
                 <div class ="graph-section2">
-               <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2412150/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&max=150&min=0&results=60&title=HeartRate&type=line&xaxis=time&yaxis=Beats+per+minute%28bpm%29&yaxismax=150&yaxismin=0"></iframe>
-               <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2412150/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&max=100&min=0&results=60&title=OxygenLevels&type=line&xaxis=time&yaxis=%25&yaxismax=100&yaxismin=0"></iframe>
+               <iframe width="500" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2412150/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&max=150&min=0&results=60&title=HeartRate&type=line&xaxis=time&yaxis=Beats+per+minute%28bpm%29&yaxismax=150&yaxismin=0"></iframe>
+               <iframe width="500" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2412150/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&max=100&min=0&results=60&title=OxygenLevels&type=line&xaxis=time&yaxis=%25&yaxismax=100&yaxismin=0"></iframe>
                 </div>
             </div>
             <div class="part2">
               <p><u>Live video of the patient</u></p>
-              <iframe width="450" height="1040" src="http://192.168.8.126/" frameborder="0" allowfullscreen></iframe>
+              <iframe width="500" height="1040" src="http://192.168.8.126/" frameborder="0" allowfullscreen></iframe>
               
             </div>
          </div>
@@ -143,7 +143,7 @@ String homePagePart4 = F(R"=====(</td>
         <td>bpm / SpO2</td>
         </tr>
         <tr>
-        <td>Emergency Button:</td>
+        <td>Patients' message:</td>
         <td> )=====");
 String homePagePart5 = F(R"=====(</td>
         <tr>
@@ -151,7 +151,7 @@ String homePagePart5 = F(R"=====(</td>
         <td> )=====");
 String homePagePart5a = F(R"=====(</td>
         <tr>
-        <td>location:</td>
+        <td>location: </td>
         <td> )=====");
 String homePagePart6 = F(R"=====(</td>
         <td></td>
